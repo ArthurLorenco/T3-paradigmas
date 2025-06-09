@@ -69,6 +69,7 @@ public class ExerciciosPlanetas {
 
 
 
+
     // Método main para imprimir o resultado
     public static void main(String[] args) {
         List<Planeta> planetas = Arrays.asList(
