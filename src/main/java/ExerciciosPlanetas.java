@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -40,7 +41,51 @@ public class ExerciciosPlanetas {
                 .sum();
     }
 
+    // Exercicio 6 - Calcule a média das distâncias dos planetas ao Sol.
+    public static double media_distancia_do_sol(List<Planeta> planetas) {
+
+        return planetas.stream()
+                .mapToDouble(Planeta::getDistanciaSol)
+                .average()
+                .orElse(0.0);
+    }
+
+    // Exercicio 7 - Liste os planetas ordenados por massa em ordem decrescente.
+    public static List<String> ordena_ordem_decrescente(List<Planeta> planetas) {
+
+        return planetas.stream()
+                .sorted(Comparator.comparing(Planeta::getMassa).reversed())
+                .map(Planeta::getNome)
+                .collect(Collectors.toList());
+
+    }
+
+    // Exercicio 8 - Agrupe os planetas de acordo com a presença ou ausência de atmosfera.
+    public static Map<Boolean, List<Planeta>> Agrupamento_planetas(List<Planeta> planetas) {
+        return planetas.stream()
+                .collect(Collectors.groupingBy(Planeta::isTemAtmosfera));
+    }
+
+    // Exercicio 9 - Liste os nomes dos três planetas mais distantes do Sol.
+    public static List<String> tres_planetas_mais_distantes(List<Planeta> planetas) {
+        return planetas.stream()
+                .sorted(Comparator.comparingDouble(Planeta::getDistanciaSol).reversed())
+                .limit(3)
+                .map(Planeta::getNome)
+                .collect(Collectors.toList());
+    }
+
+
+    // Exercicio 10 - Crie uma única String com os nomes de todos os planetas, separados por vírgulas
+    public static String nome_planetas(List<Planeta> planetas) {
+        return planetas.stream()
+                .map(Planeta::getNome)
+                .collect(Collectors.joining(", "));
+    }
+
+
     // Metodo main para imprimir o resultado
+
     public static void main(String[] args) {
         List<Planeta> planetas = Arrays.asList(
                 new Planeta("Mercúrio", 0.33, 4879, 58, false),
@@ -75,6 +120,28 @@ public class ExerciciosPlanetas {
         // Exercício 5
         double massaTotal = calcularMassaTotal(planetas);
         System.out.println("Massa total dos planetas: " + massaTotal);
+
+        // Exercicio 6
+        System.out.println("Media da distancia: " + media_distancia_do_sol(planetas));
+
+        // Exercicio 7
+        System.out.println("Por massa decrescente: " + ordena_ordem_decrescente(planetas));
+
+        // Exercicio 8
+        Map<Boolean, List<Planeta>> mapa_atmosfera = Agrupamento_planetas(planetas);
+        System.out.println("Agrupados por atmosfera:");
+
+        System.out.println("False => " +  mapa_atmosfera.get(false)
+                .stream().map(Planeta::getNome).collect(Collectors.toList()));;
+        System.out.println("True => " +  mapa_atmosfera.get(true)
+                .stream().map(Planeta::getNome).collect(Collectors.toList()));
+
+        // Exercicio 9
+        System.out.println("Top 3 distantes do sol: " + tres_planetas_mais_distantes(planetas));
+
+        // Exercicio 10
+        System.out.println("Todos os nomes: " + nome_planetas(planetas));
+
 
     }
 }

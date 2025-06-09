@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -68,7 +69,76 @@ public class ExerciciosPlanetasTest {
 
         double resultado = ExerciciosPlanetas.calcularMassaTotal(planetas);
 
-        // Resultado esperado: 2666.612 (conforme gabarito)
-        assertEquals(2666.612, resultado, 0.001); // tolerância de erro por causa de ponto flutuante
+        assertEquals(2666.612, resultado, 0.001);
     }
+
+    @Test
+    public void test_media_distancia_do_sol() {
+        List<Planeta> planetas = criarListaPlanetas();
+
+        double resultado = ExerciciosPlanetas.media_distancia_do_sol(planetas);
+
+        assertEquals(1264, resultado, 0.001);
+    }
+
+    @Test
+    public void test_ordena_ordem_decrescente() {
+        List<Planeta> planetas = criarListaPlanetas();
+
+        List<String> resultado = ExerciciosPlanetas.ordena_ordem_decrescente(planetas);
+        List<String> esperado = Arrays.asList("Júpiter", "Saturno", "Netuno", "Urano", "Terra", "Vênus",
+                "Marte", "Mercúrio");
+
+        assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void test_Agrupamento_planetas(){
+        List<Planeta> planetas = criarListaPlanetas();
+
+        Map<Boolean, List<Planeta>> agrupados = ExerciciosPlanetas.Agrupamento_planetas(planetas);
+
+        List<String> comAtmosfera = agrupados.get(true).stream()
+                .map(Planeta::getNome)
+                .collect(Collectors.toList());
+
+        assertTrue(comAtmosfera.contains("Vênus"));
+        assertTrue(comAtmosfera.contains("Júpiter"));
+        assertTrue(comAtmosfera.contains("Saturno"));
+        assertTrue(comAtmosfera.contains("Urano"));
+        assertTrue(comAtmosfera.contains("Netuno"));
+        assertTrue(comAtmosfera.contains("Terra"));
+        assertTrue(comAtmosfera.contains("Marte"));
+
+        List<String> semAtmosfera = agrupados.get(false).stream()
+                .map(Planeta::getNome)
+                .collect(Collectors.toList());
+        assertTrue(semAtmosfera.contains("Mercúrio"));
+
+    }
+
+    @Test
+    public void test_tres_planetas_mais_distantes(){
+        List<Planeta> planetas = criarListaPlanetas();
+
+        List<String> resultado = ExerciciosPlanetas.tres_planetas_mais_distantes(planetas);
+        List<String> esperado = Arrays.asList("Netuno", "Urano", "Saturno");
+
+        assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void test_nome_planetas(){
+        List<Planeta> planetas = criarListaPlanetas();
+
+        String resultado = ExerciciosPlanetas.nome_planetas(planetas);
+        String esperado = "Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano, Netuno";
+
+        assertEquals(esperado, resultado);
+    }
+
+
+
+
+
 }
