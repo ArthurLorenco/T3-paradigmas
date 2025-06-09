@@ -78,6 +78,15 @@ public class ExerciciosPlanetas {
     }
 
 
+    // Exercicio 10 - Crie uma única String com os nomes de todos os planetas, separados por vírgulas
+
+    public static String nome_planetas(List<Planeta> planetas) {
+        return planetas.stream()
+                .map(Planeta::getNome)
+                .collect(Collectors.joining(", "));
+    }
+
+
     // Método main para imprimir o resultado
     public static void main(String[] args) {
         List<Planeta> planetas = Arrays.asList(
