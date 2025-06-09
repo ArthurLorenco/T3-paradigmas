@@ -33,10 +33,14 @@ public class ExerciciosPlanetas {
                 .anyMatch(p -> p.getMassa() > 1000);
     }
 
-    // Exercício 5 -
+    // Exercício 5 - Calcule a massa total de todos os planetas da lista
+    public static double calcularMassaTotal(List<Planeta> planetas) {
+        return planetas.stream()
+                .mapToDouble(Planeta::getMassa)
+                .sum();
+    }
 
-
-    // Método main para imprimir o resultado
+    // Metodo main para imprimir o resultado
     public static void main(String[] args) {
         List<Planeta> planetas = Arrays.asList(
                 new Planeta("Mercúrio", 0.33, 4879, 58, false),
@@ -67,6 +71,10 @@ public class ExerciciosPlanetas {
         // Exercício 4
         boolean existePesado = existePlanetaComMassaMaiorQue1000(planetas);
         System.out.println("Existe planeta com massa > 1000? " + existePesado);
+
+        // Exercício 5
+        double massaTotal = calcularMassaTotal(planetas);
+        System.out.println("Massa total dos planetas: " + massaTotal);
 
     }
 }

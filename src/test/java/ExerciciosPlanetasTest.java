@@ -61,4 +61,14 @@ public class ExerciciosPlanetasTest {
         boolean resultado = ExerciciosPlanetas.existePlanetaComMassaMaiorQue1000(planetas);
         assertTrue(resultado);
     }
+
+    @Test
+    public void testCalcularMassaTotal() {
+        List<Planeta> planetas = criarListaPlanetas();
+
+        double resultado = ExerciciosPlanetas.calcularMassaTotal(planetas);
+
+        // Resultado esperado: 2666.612 (conforme gabarito)
+        assertEquals(2666.612, resultado, 0.001); // tolerância de erro por causa de ponto flutuante
+    }
 }
