@@ -36,6 +36,19 @@ public class ExerciciosPlanetas {
     // Exercício 5 -
 
 
+
+    // Exercicio 6 - Calcule a média das distâncias dos planetas ao Sol.
+
+    public static double media_distancia_do_sol(List<Planeta> planetas) {
+
+        return planetas.stream()
+                .mapToDouble(Planeta::getDistanciaSol)
+                .average()
+                .orElse(0.0);
+
+    }
+
+
     // Método main para imprimir o resultado
     public static void main(String[] args) {
         List<Planeta> planetas = Arrays.asList(
