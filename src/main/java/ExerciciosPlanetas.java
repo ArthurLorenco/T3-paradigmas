@@ -67,7 +67,15 @@ public class ExerciciosPlanetas {
                 .collect(Collectors.groupingBy(Planeta::isTemAtmosfera));
     }
 
+    // Exercicio 9 - Liste os nomes dos três planetas mais distantes do Sol.
 
+    public static List<String> tres_planetas_mais_distantes(List<Planeta> planetas) {
+        return planetas.stream()
+                .sorted(Comparator.comparingDouble(Planeta::getDistanciaSol).reversed())
+                .limit(3)
+                .map(Planeta::getNome)
+                .collect(Collectors.toList());
+    }
 
 
     // Método main para imprimir o resultado
