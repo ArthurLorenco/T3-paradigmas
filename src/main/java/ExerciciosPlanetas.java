@@ -48,6 +48,18 @@ public class ExerciciosPlanetas {
 
     }
 
+    //Exercicio 7 - Liste os planetas ordenados por massa em ordem decrescente.
+
+    public static List<String> ordena_ordem_crescente(List<Planeta> planetas) {
+
+        return planetas.stream()
+                .sorted(Comparator.comparing(Planeta::getMassa).reversed())
+                .map(Planeta::getNome)
+                .collect(Collectors.toList());
+
+    }
+
+
 
     // Método main para imprimir o resultado
     public static void main(String[] args) {
