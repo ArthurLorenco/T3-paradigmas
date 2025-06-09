@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -48,7 +49,7 @@ public class ExerciciosPlanetas {
 
     }
 
-    //Exercicio 7 - Liste os planetas ordenados por massa em ordem decrescente.
+    // Exercicio 7 - Liste os planetas ordenados por massa em ordem decrescente.
 
     public static List<String> ordena_ordem_crescente(List<Planeta> planetas) {
 
@@ -57,6 +58,13 @@ public class ExerciciosPlanetas {
                 .map(Planeta::getNome)
                 .collect(Collectors.toList());
 
+    }
+
+    // Exercicio 8 - Agrupe os planetas de acordo com a presença ou ausência de atmosfera.
+
+    public static Map<Boolean, List<Planeta>> Agrupamento_planetas(List<Planeta> planetas) {
+        return planetas.stream()
+                .collect(Collectors.groupingBy(Planeta::isTemAtmosfera));
     }
 
 
