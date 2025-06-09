@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class ExerciciosPlanetas {
 
@@ -18,6 +19,22 @@ public class ExerciciosPlanetas {
                 .map(Planeta::getNome)
                 .collect(Collectors.toList());
     }
+
+    // Exercício 3 - Encontre o planeta mais próximo do Sol
+    public static Planeta planetaMaisProximoDoSol(List<Planeta> planetas) {
+        return planetas.stream()
+                .min(Comparator.comparingDouble(Planeta::getDistanciaSol))
+                .orElse(null);
+    }
+
+    // Exercício 4 - Verifique se existe algum planeta com massa maior que 1000
+    public static boolean existePlanetaComMassaMaiorQue1000(List<Planeta> planetas) {
+        return planetas.stream()
+                .anyMatch(p -> p.getMassa() > 1000);
+    }
+
+    // Exercício 5 -
+
 
     // Método main para imprimir o resultado
     public static void main(String[] args) {
@@ -42,5 +59,14 @@ public class ExerciciosPlanetas {
         // Exercício 2
         List<String> nomesDiametro = nomesDiametroMaiorQue10000(planetas);
         System.out.println("Planetas com diâmetro > 10000 km: " + nomesDiametro);
+
+        // Exercício 3
+        Planeta maisProximo = planetaMaisProximoDoSol(planetas);
+        System.out.println("Planeta mais próximo do Sol: " + maisProximo.getNome());
+
+        // Exercício 4
+        boolean existePesado = existePlanetaComMassaMaiorQue1000(planetas);
+        System.out.println("Existe planeta com massa > 1000? " + existePesado);
+
     }
 }
