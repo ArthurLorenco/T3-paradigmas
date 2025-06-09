@@ -11,6 +11,14 @@ public class ExerciciosPlanetas {
                 .collect(Collectors.toList());
     }
 
+    // Exercício 2 - Liste os nomes dos planetas com diâmetro maior que 10.000 km
+    public static List<String> nomesDiametroMaiorQue10000(List<Planeta> planetas) {
+        return planetas.stream()
+                .filter(p -> p.getDiametro() > 10000)
+                .map(Planeta::getNome)
+                .collect(Collectors.toList());
+    }
+
     // Método main para imprimir o resultado
     public static void main(String[] args) {
         List<Planeta> planetas = Arrays.asList(
@@ -24,12 +32,15 @@ public class ExerciciosPlanetas {
                 new Planeta("Netuno", 102, 49528, 4490, true)
         );
 
+        // Exercício 1
         List<Planeta> comAtmosfera = filtrarComAtmosfera(planetas);
-
-        List<String> nomes = comAtmosfera.stream()
+        List<String> nomesComAtmosfera = comAtmosfera.stream()
                 .map(Planeta::getNome)
                 .collect(Collectors.toList());
+        System.out.println("Planetas com atmosfera: " + nomesComAtmosfera);
 
-        System.out.println(nomes);
+        // Exercício 2
+        List<String> nomesDiametro = nomesDiametroMaiorQue10000(planetas);
+        System.out.println("Planetas com diâmetro > 10000 km: " + nomesDiametro);
     }
 }
